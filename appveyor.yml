@@ -18,9 +18,10 @@ test_script:
   # Output useful info for debugging.
   - node --version
   - npm --version
+  - yarn --version
   # run tests
-  - npm run lint
-  - npm run test-once
+  - yarn run lint
+  - yarn run test -- --watch false
   # - npm run e2e
 
 # Don't actually build.
