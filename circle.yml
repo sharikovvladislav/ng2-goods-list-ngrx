@@ -5,6 +5,7 @@ machine:
 dependencies:
   override:
     - yarn install
+    - yarn global add @angular/cli
 test:
   override:
     - ng lint
