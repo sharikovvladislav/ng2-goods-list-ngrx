@@ -29,8 +29,9 @@ import { GoogleBooksService } from './services/google-books';
 import { routes } from './routes';
 import { reducer } from './reducers';
 import { schema } from './db';
-
-
+// Imports for loading & configuring the in-memory web api
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryGoodsDataService } from './mocks/in-memory-data';
 
 @NgModule({
   imports: [
@@ -40,6 +41,8 @@ import { schema } from './db';
     MaterialModule,
     ComponentsModule,
     RouterModule.forRoot(routes, { useHash: true }),
+
+    InMemoryWebApiModule.forRoot(InMemoryGoodsDataService),
 
     /**
      * StoreModule.provideStore is imported once in the root module, accepting a reducer
