@@ -2,6 +2,9 @@ machine:
   node:
     version: 6.9.5
 ## Customize test commands
+dependencies:
+  override:
+    - yarn install
 test:
   override:
     - ng lint
