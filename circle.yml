@@ -2,6 +2,10 @@ machine:
   node:
     version: 6.9.5
 ## Customize test commands
+dependencies:
+  override:
+    - yarn install
+    - yarn global add @angular/cli
 test:
   override:
     - ng lint
