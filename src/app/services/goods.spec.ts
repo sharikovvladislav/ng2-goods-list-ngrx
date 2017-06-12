@@ -3,7 +3,7 @@ import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } fr
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { GoodsService } from './goods';
 
-fdescribe('Service: Goods', () => {
+describe('Service: Goods', () => {
   let service: GoodsService = null;
   let backend: MockBackend = null;
 
@@ -45,7 +45,7 @@ fdescribe('Service: Goods', () => {
       }
     ];
     const mockedResponse = {
-      items: mockData
+      data: mockData
     };
 
     backend.connections.subscribe((connection: MockConnection) => {
