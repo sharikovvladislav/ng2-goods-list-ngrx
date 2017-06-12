@@ -29,7 +29,7 @@ describe('Service: Goods', () => {
     backend = mockBackend;
   }));
 
-  fit('should call the get list api and return goods list', (done) => {
+  it('should call the get list api and return goods list', (done) => {
     const mockData = [
       {
         id: 10,
@@ -45,7 +45,7 @@ describe('Service: Goods', () => {
       }
     ];
     const mockedResponse = {
-      items: mockData
+      data: mockData
     };
 
     backend.connections.subscribe((connection: MockConnection) => {

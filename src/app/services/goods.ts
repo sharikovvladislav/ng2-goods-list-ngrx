@@ -13,7 +13,7 @@ export class GoodsService {
 
   getAllGoods(): Observable<Good[]> {
     return this.http.get(this.API_PATH)
-      .map(res => res.json().items || []);
+      .map(res => res.json().data || []);
   }
 
   getGood(goodId: number): Observable<Good> {

@@ -13,6 +13,7 @@ import { MaterialModule } from '@angular/material';
 
 import { ComponentsModule } from './components';
 import { BookEffects } from './effects/book';
+import { GoodEffects } from './effects/good';
 import { CollectionEffects } from './effects/collection';
 import { BookExistsGuard } from './guards/book-exists';
 
@@ -33,6 +34,7 @@ import { schema } from './db';
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryGoodsDataService } from './mocks/in-memory-data';
+import { GoodsService } from './services/goods';
 
 @NgModule({
   imports: [
@@ -79,6 +81,7 @@ import { InMemoryGoodsDataService } from './mocks/in-memory-data';
      * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
      */
     EffectsModule.run(BookEffects),
+    EffectsModule.run(GoodEffects),
     EffectsModule.run(CollectionEffects),
 
     /**
@@ -98,7 +101,8 @@ import { InMemoryGoodsDataService } from './mocks/in-memory-data';
   ],
   providers: [
     BookExistsGuard,
-    GoogleBooksService
+    GoogleBooksService,
+    GoodsService,
   ],
   bootstrap: [
     AppComponent
