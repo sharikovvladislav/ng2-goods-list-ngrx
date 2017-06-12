@@ -13,16 +13,26 @@ import { Good } from '../models/good';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <bc-goods-list [goods]="goods"></bc-goods-list>
-    <bc-goods-detail></bc-goods-detail>
+    <bc-goods-detail
+      [good]="good"
+      (save)="onSave(good)"
+    ></bc-goods-detail>
   `
 })
 export class GoodsContainerComponent {
   goods: Good[];
+  good: Good = {id: 1, name: '1'};
+
   constructor() {
     this.goods = [
       {id: 1, name: '1'},
       {id: 2, name: '2'},
       {id: 3, name: '3'},
     ];
+  }
+
+  onSave(good: Good) {
+    debugger;
+    console.log(good);
   }
 }
