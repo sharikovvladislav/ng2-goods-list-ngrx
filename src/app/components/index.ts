@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { BookAuthorsComponent } from './book-authors';
 import { BookDetailComponent } from './book-detail';
@@ -43,6 +44,7 @@ export const COMPONENTS = [
     MaterialModule,
     RouterModule,
     PipesModule,
+    FormsModule,
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS

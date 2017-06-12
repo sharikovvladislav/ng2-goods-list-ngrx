@@ -1,19 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
-// import { Book } from '../models/good';
+import { Good } from '../models/good';
 
 
 @Component({
   selector: 'bc-goods-detail',
-  template: `    
-    <span>detail</span>
+  template: `
+    <span>good id: {{good.id}}</span>
+    <input [(ngModel)]="good.name" />
+    <button (click)="save.emit(good)">Save</button>
   `,
   styles: []
 })
 export class GoodsDetailComponent {
-  // @Input() good: Book;
-  //
-  // get authors() {
-  //   return this.good.volumeInfo.authors;
-  // }
+  @Input() good: Good;
+  @Output() save  = new EventEmitter<Good>();
 }

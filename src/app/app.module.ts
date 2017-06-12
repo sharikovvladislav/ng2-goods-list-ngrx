@@ -29,6 +29,7 @@ import { GoogleBooksService } from './services/google-books';
 import { routes } from './routes';
 import { reducer } from './reducers';
 import { schema } from './db';
+
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryGoodsDataService } from './mocks/in-memory-data';
