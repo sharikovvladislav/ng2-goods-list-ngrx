@@ -39,6 +39,7 @@ import { combineReducers } from '@ngrx/store';
  */
 import * as fromSearch from './search';
 import * as fromBooks from './books';
+import * as fromGoods from './goods';
 import * as fromCollection from './collection';
 import * as fromLayout from './layout';
 
@@ -50,6 +51,7 @@ import * as fromLayout from './layout';
 export interface State {
   search: fromSearch.State;
   books: fromBooks.State;
+  goods: fromGoods.State;
   collection: fromCollection.State;
   layout: fromLayout.State;
   router: fromRouter.RouterState;
@@ -68,6 +70,7 @@ const reducers = {
   books: fromBooks.reducer,
   collection: fromCollection.reducer,
   layout: fromLayout.reducer,
+  goods: fromGoods.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -115,6 +118,9 @@ export const getBooksState = (state: State) => state.books;
  export const getSelectedBookId = createSelector(getBooksState, fromBooks.getSelectedId);
  export const getSelectedBook = createSelector(getBooksState, fromBooks.getSelected);
 
+export const getGoodsState = (state: State) => state.goods;
+
+export const getGoodEntities = createSelector(getGoodsState, fromGoods.getEntities);
 
 /**
  * Just like with the books selectors, we also have to compose the search
