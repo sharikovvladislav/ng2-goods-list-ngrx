@@ -12,7 +12,10 @@ import { Good } from '../models/good';
   selector: 'bc-goods-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <bc-goods-list [goods]="goods"></bc-goods-list>
+    <bc-goods-list
+      [goods]="goods"
+      (select)="onListSelect(good)"
+    ></bc-goods-list>
     <bc-goods-detail
       [good]="good"
       (save)="onSave(good)"
@@ -32,7 +35,11 @@ export class GoodsContainerComponent {
   }
 
   onSave(good: Good) {
+    console.log('Item saved: ', good);
+  }
+
+  onListSelect(good: Good) {
     debugger;
-    console.log(good);
+    console.log('Item selected: ', good);
   }
 }
