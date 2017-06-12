@@ -1,19 +1,15 @@
 import { Component, Input } from '@angular/core';
 
-// import { Book } from '../models/book';
+import { Good } from '../models/good';
 
 
 @Component({
   selector: 'bc-goods-list',
-  template: `    
-    <span>list</span>
+  template: `
+    <bc-goods-list-item *ngFor="let good of goods" [good]="good"></bc-goods-list-item>
   `,
   styles: []
 })
 export class GoodsListComponent {
-  // @Input() book: Book;
-  //
-  // get authors() {
-  //   return this.book.volumeInfo.authors;
-  // }
+  @Input() goods: Good[];
 }

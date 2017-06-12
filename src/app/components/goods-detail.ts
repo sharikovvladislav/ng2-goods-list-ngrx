@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-// import { Book } from '../models/book';
+// import { Book } from '../models/good';
 
 
 @Component({
@@ -11,9 +11,9 @@ import { Component, Input } from '@angular/core';
   styles: []
 })
 export class GoodsDetailComponent {
-  // @Input() book: Book;
+  // @Input() good: Book;
   //
   // get authors() {
-  //   return this.book.volumeInfo.authors;
+  //   return this.good.volumeInfo.authors;
   // }
 }

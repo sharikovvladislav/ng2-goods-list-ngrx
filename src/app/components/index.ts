@@ -15,6 +15,7 @@ import { SidenavComponent } from './sidenav';
 import { ToolbarComponent } from './toolbar';
 import { GoodsListComponent } from './goods-list';
 import { GoodsDetailComponent } from './goods-detail';
+import { GoodsListItemComponent } from './goods-list-item';
 
 import { PipesModule } from '../pipes';
 
@@ -31,6 +32,7 @@ export const COMPONENTS = [
   ToolbarComponent,
   GoodsListComponent,
   GoodsDetailComponent,
+  GoodsListItemComponent,
 ];
 
 
