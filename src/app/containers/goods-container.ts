@@ -39,7 +39,6 @@ export class GoodsContainerComponent {
   }
 
   onListSelect(good: Good) {
-    debugger;
     console.log('Item selected: ', good);
   }
 }
