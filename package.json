@@ -12,6 +12,9 @@
     "e2e": "ng e2e",
     "build": "ng build --prod"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ngrx/example-app.git"
@@ -67,6 +70,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ngrx-store-freeze": "^0.1.6",
+    "pre-commit": "^1.2.2",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
