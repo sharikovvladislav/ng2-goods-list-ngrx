@@ -12,17 +12,33 @@ import { Good } from '../models/good';
   selector: 'bc-goods-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <bc-goods-list [goods]="goods"></bc-goods-list>
-    <bc-goods-detail></bc-goods-detail>
+    <bc-goods-list
+      [goods]="goods"
+      (select)="onListSelect(good)"
+    ></bc-goods-list>
+    <bc-goods-detail
+      [good]="good"
+      (save)="onSave(good)"
+    ></bc-goods-detail>
   `
 })
 export class GoodsContainerComponent {
   goods: Good[];
+  good: Good = {id: 1, name: '1'};
+
   constructor() {
     this.goods = [
       {id: 1, name: '1'},
       {id: 2, name: '2'},
       {id: 3, name: '3'},
     ];
+  }
+
+  onSave(good: Good) {
+    console.log('Item saved: ', good);
+  }
+
+  onListSelect(good: Good) {
+    console.log('Item selected: ', good);
   }
 }
