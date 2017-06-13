@@ -28,6 +28,7 @@ import * as layout from '../actions/layout';
       </bc-toolbar>
 
       <router-outlet></router-outlet>
+      <ngrx-store-log-monitor toggleCommand="ctrl-h" positionCommwand="ctrl-m"></ngrx-store-log-monitor>
     </bc-layout>
   `
 })
