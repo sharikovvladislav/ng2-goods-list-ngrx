@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { DBModule } from '@ngrx/db';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { MaterialModule } from '@angular/material';
 
 import { ComponentsModule } from './components';
@@ -72,7 +73,8 @@ import { GoodsService } from './services/goods';
      *
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    StoreDevtoolsModule.instrumentStore(logMonitorDecorator),
+    StoreLogMonitorModule,
 
     /**
      * EffectsModule.run() sets up the effects class to be initialized
@@ -109,3 +111,10 @@ import { GoodsService } from './services/goods';
   ]
 })
 export class AppModule { }
+
+function logMonitorDecorator() {
+  return {
+    monitor: useLogMonitor({ visible: true, position: 'right' })
+  };
+}
+
