@@ -45,6 +45,7 @@ export class GoodsContainerComponent implements OnInit {
 
   onSave(good: Good) {
     console.log('Item saved: ', good);
+    this.store.dispatch(new goodsActions.SaveGoodAction(good));
   }
 
   onListSelect(good: Good) {

@@ -20,6 +20,16 @@ export function reducer(state = initialState, action: good.Actions): State {
       };
     }
 
+    case good.SAVE_GOOD_SUCCESS: {
+      const updatedGood: Good = action.payload;
+      const currentGoods = state.entities;
+      const newGoods = currentGoods.map(good => good.id === updatedGood.id ? updatedGood : good);
+
+      return { // new state
+        entities: newGoods
+      };
+    }
+
     default: {
       return state;
     }

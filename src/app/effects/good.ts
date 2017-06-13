@@ -45,5 +45,15 @@ export class GoodEffects {
         .catch(() => of(new good.LoadCollectionFailAction([])));
     });
 
+  @Effect()
+  saveGood$: Observable<Action> = this.actions$
+    .ofType(good.SAVE_GOOD)
+    .map(toPayload)
+    .switchMap(goodData => {
+      return this.goodsService.updateGood(goodData.id, goodData)
+        .map(() => new good.SaveGoodSuccessAction(goodData))
+        .catch(() => of(new good.SaveGoodFailAction({})));
+    });
+
   constructor(private actions$: Actions, private goodsService: GoodsService) { }
 }
