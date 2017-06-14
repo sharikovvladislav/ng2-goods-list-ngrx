@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 
 import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as fromRoot from '../reducers';
@@ -15,25 +15,38 @@ import { Good } from '../models/good';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <bc-goods-list
-      [goods]="goods$ | async"
-      [selectedGood]="selectedGood$ | async"
+      [goods]="goods"
+      [selectedGood]="selectedGood"
       (select)="onListSelect($event)"
     ></bc-goods-list>
     <bc-goods-detail
-      [good]="selectedGood$ | async"
+      [good]="selectedGood"
       (save)="onSave($event)"
     ></bc-goods-detail>
   `
 })
 export class GoodsContainerComponent implements OnInit {
+  goods: Good[];
+  selectedGood: Good;
   goods$: Observable<Good[]>;
   selectedGood$: Observable<Good>;
 
   ngOnInit() {
     this.store.dispatch(new goodsActions.LoadCollectionAction());
+
+    this.goods$
+      .subscribe(newGoods => {
+        this.goods = [...newGoods];
+        this.changeDetectorRef.markForCheck();
+      });
+    this.selectedGood$
+      .subscribe(newSelectedGood => {
+        this.selectedGood = Object.assign({}, newSelectedGood);
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(private store: Store<fromRoot.State>, private changeDetectorRef: ChangeDetectorRef) {
     this.goods$ = store.select(fromRoot.getGoodEntities);
     this.selectedGood$ = store.select(fromRoot.getGoodSelectedEntity);
   }
