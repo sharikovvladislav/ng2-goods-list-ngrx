@@ -74,7 +74,10 @@ export class GoodsContainerComponent implements OnInit {
         this.changeDetectorRef.markForCheck();
       });
     this.isCreateFormOpened$
-      .subscribe(newIsOpened => this.isCreateFormOpened = newIsOpened);
+      .subscribe(newIsOpened => {
+        this.isCreateFormOpened = newIsOpened;
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
   constructor(private store: Store<fromRoot.State>, private changeDetectorRef: ChangeDetectorRef) {
