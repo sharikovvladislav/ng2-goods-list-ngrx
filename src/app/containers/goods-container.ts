@@ -14,20 +14,43 @@ import { Good } from '../models/good';
   selector: 'bc-goods-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <bc-goods-list
-      [goods]="goods"
-      [selectedGood]="selectedGood"
-      (select)="onListSelect($event)"
-    ></bc-goods-list>
-    <button (click)="onAddClick()">Add item</button>
-    <bc-good-edit
-      *ngIf="!isCreateFormOpened"
-      [selectedGood]="selectedGood"
-    ></bc-good-edit>
-    <bc-good-create
-      *ngIf="isCreateFormOpened"
-    ></bc-good-create>
-  `
+    <section
+      class="flex-container"
+    >
+      <section class="list flex-item">
+        <h1>Список</h1>
+        <button (click)="onAddClick()">Add item to list</button>
+        <bc-goods-list
+          [goods]="goods"
+          [selectedGood]="selectedGood"
+          (select)="onListSelect($event)"
+        ></bc-goods-list>
+      </section>
+      <section class="form flex-item">
+        <h1>Форма</h1>
+        <bc-good-edit
+          *ngIf="!isCreateFormOpened"
+          [selectedGood]="selectedGood"
+        ></bc-good-edit>
+        <bc-good-create
+          *ngIf="isCreateFormOpened"
+        ></bc-good-create>
+      </section>
+    </section>
+  `,
+  styles: [
+    `.flex-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }`,
+    `.flex-item {
+      margin: auto;
+    }`,
+    `section {
+      
+    }`
+  ]
 })
 export class GoodsContainerComponent implements OnInit {
   goods: Good[];
@@ -51,7 +74,7 @@ export class GoodsContainerComponent implements OnInit {
         this.changeDetectorRef.markForCheck();
       });
     this.isCreateFormOpened$
-      .subscribe(isOpened => this.isCreateFormOpened = isOpened);
+      .subscribe(newIsOpened => this.isCreateFormOpened = newIsOpened);
   }
 
   constructor(private store: Store<fromRoot.State>, private changeDetectorRef: ChangeDetectorRef) {
@@ -60,13 +83,7 @@ export class GoodsContainerComponent implements OnInit {
     this.isCreateFormOpened$ = store.select(fromRoot.getIsCreateFormOpened);
   }
 
-  onSave(good: Good) {
-    console.log('Item saved: ', good);
-    this.store.dispatch(new goodsActions.SaveGoodAction(good));
-  }
-
   onListSelect(good: Good) {
-    console.log('Item selected: ', good);
     this.store.dispatch(new goodsActions.SelectGoodAction(good));
   }
 
