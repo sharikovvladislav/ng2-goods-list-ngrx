@@ -8,6 +8,11 @@ export const SAVE_GOOD                = '[Good] Save good';
 export const SAVE_GOOD_SUCCESS        = '[Good] Save good complete';
 export const SAVE_GOOD_FAIL           = '[Good] Save good fail';
 export const SELECT_GOOD              = '[Good] Select';
+export const CREATE_GOOD              = '[Good] Create good';
+export const CREATE_GOOD_SUCCESS      = '[Good] Create good success';
+export const CREATE_GOOD_FAIL         = '[Good] Create good fail';
+export const OPEN_CREATE_FORM         = '[Good] Open create form';
+export const CLOSE_CREATE_FORM         = '[Good] Close create form';
 
 
 /**
@@ -56,6 +61,36 @@ export class SelectGoodAction implements Action {
 
   constructor(public payload: Good) { }
 }
+
+export class CreateGoodAction implements Action {
+  readonly type = CREATE_GOOD;
+
+  constructor(public payload: Good) { }
+}
+
+export class CreateGoodFailAction implements Action {
+  readonly type = CREATE_GOOD_FAIL;
+
+  constructor(public payload: Good) { }
+}
+
+export class CreateGoodSuccessAction implements Action {
+  readonly type = CREATE_GOOD_SUCCESS;
+
+  constructor(public payload: Good) { }
+}
+
+export class OpenCreateForm implements Action {
+  readonly type = OPEN_CREATE_FORM;
+
+  constructor() { }
+}
+
+export class CloseCreateForm implements Action {
+  readonly type = CLOSE_CREATE_FORM;
+
+  constructor() { }
+}
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -67,7 +102,12 @@ export type Actions
   | SaveGoodAction
   | SaveGoodSuccessAction
   | SaveGoodFailAction
-  | SelectGoodAction;
+  | SelectGoodAction
+  | CreateGoodAction
+  | CreateGoodSuccessAction
+  | CreateGoodFailAction
+  | OpenCreateForm
+  | CloseCreateForm;
 // export type Actions
 //   = SearchAction
 //   | SearchCompleteAction

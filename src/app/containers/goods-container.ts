@@ -19,10 +19,14 @@ import { Good } from '../models/good';
       [selectedGood]="selectedGood"
       (select)="onListSelect($event)"
     ></bc-goods-list>
-    <bc-goods-detail
-      [good]="selectedGood"
-      (save)="onSave($event)"
-    ></bc-goods-detail>
+    <button (click)="onAddClick()">Add item</button>
+    <bc-good-edit
+      *ngIf="!isCreateFormOpened"
+      [selectedGood]="selectedGood"
+    ></bc-good-edit>
+    <bc-good-create
+      *ngIf="isCreateFormOpened"
+    ></bc-good-create>
   `
 })
 export class GoodsContainerComponent implements OnInit {
@@ -30,6 +34,8 @@ export class GoodsContainerComponent implements OnInit {
   selectedGood: Good;
   goods$: Observable<Good[]>;
   selectedGood$: Observable<Good>;
+  isCreateFormOpened: boolean;
+  isCreateFormOpened$: Observable<boolean>;
 
   ngOnInit() {
     this.store.dispatch(new goodsActions.LoadCollectionAction());
@@ -44,11 +50,14 @@ export class GoodsContainerComponent implements OnInit {
         this.selectedGood = { ...newSelectedGood };
         this.changeDetectorRef.markForCheck();
       });
+    this.isCreateFormOpened$
+      .subscribe(isOpened => this.isCreateFormOpened = isOpened);
   }
 
   constructor(private store: Store<fromRoot.State>, private changeDetectorRef: ChangeDetectorRef) {
     this.goods$ = store.select(fromRoot.getGoodEntities);
     this.selectedGood$ = store.select(fromRoot.getGoodSelectedEntity);
+    this.isCreateFormOpened$ = store.select(fromRoot.getIsCreateFormOpened);
   }
 
   onSave(good: Good) {
@@ -59,5 +68,9 @@ export class GoodsContainerComponent implements OnInit {
   onListSelect(good: Good) {
     console.log('Item selected: ', good);
     this.store.dispatch(new goodsActions.SelectGoodAction(good));
+  }
+
+  onAddClick() {
+    this.store.dispatch(new goodsActions.OpenCreateForm());
   }
 }

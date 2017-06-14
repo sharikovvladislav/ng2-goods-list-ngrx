@@ -21,6 +21,11 @@ export class GoodsService {
       .map(res => res.json());
   }
 
+  createGood(good: Good): any {
+    return this.http.post(`${this.API_PATH}`, good)
+      .map(res => res.json());
+  }
+
   updateGood(goodId: number, good: Good): Observable<Good> {
     return this.http.put(`${this.API_PATH}/${goodId}`, good)
       .map(res => res.json());
