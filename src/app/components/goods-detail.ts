@@ -6,13 +6,21 @@ import { Good } from '../models/good';
 @Component({
   selector: 'bc-goods-detail',
   template: `
-    <span>good id: {{good.id}}</span>
-    <input [(ngModel)]="good.name" />
-    <button (click)="save.emit(good)">Save</button>
+    <span>good id: {{good?.id}}</span>
+    <input [value]="good?.name" (input)="onInput($event)" />
+    <button (click)="onClick()">Save</button>
   `,
   styles: []
 })
 export class GoodsDetailComponent {
   @Input() good: Good;
   @Output() save  = new EventEmitter<Good>();
+
+  onClick() {
+    this.save.emit(this.good);
+  }
+
+  onInput ($event) {
+    this.good.name = $event.target.value;
+  }
 }

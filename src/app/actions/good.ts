@@ -4,6 +4,10 @@ import { Good } from '../models/good';
 export const LOAD_COLLECTION          = '[Good] Load collection';
 export const LOAD_COLLECTION_SUCCESS  = '[Good] Load collection complete';
 export const LOAD_COLLECTION_FAIL     = '[Good] Load collection fail';
+export const SAVE_GOOD                = '[Good] Save good';
+export const SAVE_GOOD_SUCCESS        = '[Good] Save good complete';
+export const SAVE_GOOD_FAIL           = '[Good] Save good fail';
+export const SELECT_GOOD              = '[Good] Select';
 
 
 /**
@@ -29,6 +33,29 @@ export class LoadCollectionFailAction implements Action {
   constructor(public payload: any) { }
 }
 
+export class SaveGoodAction implements Action {
+  readonly type = SAVE_GOOD;
+
+  constructor(public payload: Good) { }
+}
+
+export class SaveGoodSuccessAction implements Action {
+  readonly type = SAVE_GOOD_SUCCESS;
+
+  constructor(public payload: Good) { }
+}
+
+export class SaveGoodFailAction implements Action {
+  readonly type = SAVE_GOOD_FAIL;
+
+  constructor(public payload: any) { }
+}
+
+export class SelectGoodAction implements Action {
+  readonly type = SELECT_GOOD;
+
+  constructor(public payload: Good) { }
+}
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -36,7 +63,11 @@ export class LoadCollectionFailAction implements Action {
 export type Actions
   = LoadCollectionAction
   | LoadCollectionSuccessAction
-  | LoadCollectionFailAction;
+  | LoadCollectionFailAction
+  | SaveGoodAction
+  | SaveGoodSuccessAction
+  | SaveGoodFailAction
+  | SelectGoodAction;
 // export type Actions
 //   = SearchAction
 //   | SearchCompleteAction

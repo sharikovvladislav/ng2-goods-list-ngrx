@@ -4,19 +4,43 @@ import * as good from '../actions/good';
 
 export interface State {
   entities: Good[];
+  selectedEntity: Good;
 }
 
 export const initialState: State = {
   entities: [],
+  selectedEntity: null
 };
 
 export function reducer(state = initialState, action: good.Actions): State {
   switch (action.type) {
     case good.LOAD_COLLECTION_SUCCESS: {
       const goods = action.payload;
+      const selectedEntity = state.selectedEntity;
 
-      return { // new state
-        entities: goods
+      return {
+        entities: goods,
+        selectedEntity: selectedEntity ? selectedEntity : goods[0]
+      };
+    }
+
+    case good.SELECT_GOOD: {
+      const newSelected: Good = action.payload;
+
+      return {
+        entities: state.entities,
+        selectedEntity: newSelected
+      };
+    }
+
+    case good.SAVE_GOOD_SUCCESS: {
+      const updatedGood: Good = action.payload;
+      const currentGoods = state.entities;
+      const newGoods = currentGoods.map(good => good.id === updatedGood.id ? updatedGood : good);
+
+      return {
+        entities: newGoods,
+        selectedEntity: updatedGood
       };
     }
 
@@ -36,3 +60,4 @@ export function reducer(state = initialState, action: good.Actions): State {
  */
 
 export const getEntities = (state: State) => state.entities;
+export const getSelectedEntity = (state: State) => state.selectedEntity;

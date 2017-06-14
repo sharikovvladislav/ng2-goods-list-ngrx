@@ -6,11 +6,14 @@ import { Good } from '../models/good';
 @Component({
   selector: 'bc-goods-list-item',
   template: `
-    <span (click)="select.emit(good)">{{good.name}}</span>
+    <li (click)="select.emit(good)" [ngClass]="{'selected': selected}">{{good.name}}</li>
   `,
-  styles: []
+  styles: [
+    '.selected { color: red }'
+  ]
 })
 export class GoodsListItemComponent {
   @Input() good: Good;
+  @Input() selected: boolean;
   @Output() select = new EventEmitter<Good>();
 }
