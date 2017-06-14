@@ -40,7 +40,7 @@ export function reducer(state = initialState, action: good.Actions): State {
 
       return {
         entities: newGoods,
-        selectedEntity: state.selectedEntity
+        selectedEntity: updatedGood
       };
     }
 

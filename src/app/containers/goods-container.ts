@@ -41,7 +41,7 @@ export class GoodsContainerComponent implements OnInit {
       });
     this.selectedGood$
       .subscribe(newSelectedGood => {
-        this.selectedGood = Object.assign({}, newSelectedGood);
+        this.selectedGood = { ...newSelectedGood };
         this.changeDetectorRef.markForCheck();
       });
   }
