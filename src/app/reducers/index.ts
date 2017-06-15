@@ -122,6 +122,7 @@ export const getGoodsState = (state: State) => state.goods;
 
 export const getGoodEntities = createSelector(getGoodsState, fromGoods.getEntities);
 export const getGoodSelectedEntity = createSelector(getGoodsState, fromGoods.getSelectedEntity);
+export const getIsCreateFormOpened = createSelector(getGoodsState, fromGoods.getIsCreateFormOpened);
 
 /**
  * Just like with the books selectors, we also have to compose the search

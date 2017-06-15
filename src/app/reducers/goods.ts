@@ -5,11 +5,13 @@ import * as good from '../actions/good';
 export interface State {
   entities: Good[];
   selectedEntity: Good;
+  isCreateOpened: boolean;
 }
 
 export const initialState: State = {
   entities: [],
-  selectedEntity: null
+  selectedEntity: null,
+  isCreateOpened: false
 };
 
 export function reducer(state = initialState, action: good.Actions): State {
@@ -20,7 +22,8 @@ export function reducer(state = initialState, action: good.Actions): State {
 
       return {
         entities: goods,
-        selectedEntity: selectedEntity ? selectedEntity : goods[0]
+        selectedEntity: selectedEntity ? selectedEntity : goods[0],
+        isCreateOpened: false
       };
     }
 
@@ -28,8 +31,9 @@ export function reducer(state = initialState, action: good.Actions): State {
       const newSelected: Good = action.payload;
 
       return {
-        entities: state.entities,
-        selectedEntity: newSelected
+        ...state,
+        selectedEntity: newSelected,
+        isCreateOpened: false
       };
     }
 
@@ -40,7 +44,33 @@ export function reducer(state = initialState, action: good.Actions): State {
 
       return {
         entities: newGoods,
-        selectedEntity: updatedGood
+        selectedEntity: updatedGood,
+        isCreateOpened: false
+      };
+    }
+
+    case good.CREATE_GOOD_SUCCESS: {
+      const newGood: Good = action.payload;
+      const newGoods = [...state.entities, newGood];
+
+      return {
+        entities: newGoods,
+        selectedEntity: newGood,
+        isCreateOpened: false
+      };
+    }
+
+    case good.OPEN_CREATE_FORM: {
+      return {
+        ...state,
+        isCreateOpened: true
+      };
+    }
+
+    case good.CLOSE_CREATE_FORM: {
+      return {
+        ...state,
+        isCreateOpened: false
       };
     }
 
@@ -61,3 +91,4 @@ export function reducer(state = initialState, action: good.Actions): State {
 
 export const getEntities = (state: State) => state.entities;
 export const getSelectedEntity = (state: State) => state.selectedEntity;
+export const getIsCreateFormOpened = (state: State) => state.isCreateOpened;

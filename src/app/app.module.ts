@@ -20,6 +20,8 @@ import { BookExistsGuard } from './guards/book-exists';
 import { AppComponent } from './containers/app';
 import { FindBookPageComponent } from './containers/find-book-page';
 import { GoodsContainerComponent } from './containers/goods-container';
+import { GoodEditContainerComponent } from './containers/good-edit';
+import { GoodCreateContainerComponent } from './containers/good-create';
 import { ViewBookPageComponent } from './containers/view-book-page';
 import { SelectedBookPageComponent } from './containers/selected-book-page';
 import { CollectionPageComponent } from './containers/collection-page';
@@ -93,6 +95,8 @@ import { GoodsService } from './services/goods';
   declarations: [
     AppComponent,
     GoodsContainerComponent,
+    GoodEditContainerComponent,
+    GoodCreateContainerComponent,
     FindBookPageComponent,
     SelectedBookPageComponent,
     ViewBookPageComponent,
