@@ -30,9 +30,8 @@ export class GoodCreateContainerComponent implements OnInit {
   constructor(private store: Store<fromRoot.State>) {
     console.log('constructor');
     this.good = {
-      id: Math.random(),
       name: ''
-    };
+    } as Good;
   }
 
   onCreate(good: Good) {

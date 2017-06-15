@@ -15,6 +15,7 @@ import { of } from 'rxjs/observable/of';
 
 import { GoodsService } from '../services/goods';
 import * as good from '../actions/good';
+import { Good } from '../models/good';
 
 
 /**
@@ -64,7 +65,7 @@ export class GoodEffects {
     .map(toPayload)
     .switchMap(goodData => {
       return this.goodsService.createGood(goodData)
-        .mergeMap(() => from([new good.LoadCollectionAction(), new good.CreateGoodSuccessAction(goodData)]))
+        .mergeMap((response) => from([new good.LoadCollectionAction(), new good.CreateGoodSuccessAction(response.data)]))
         .catch(() => of(new good.CreateGoodFailAction(null)));
     });
 
