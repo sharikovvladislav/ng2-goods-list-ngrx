@@ -9,13 +9,11 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { empty } from 'rxjs/observable/empty';
-import { from } from 'rxjs/observable/from';
+import 'rxjs/add/observable/from';
 import { of } from 'rxjs/observable/of';
 
 import { GoodsService } from '../services/goods';
 import * as good from '../actions/good';
-import { Good } from '../models/good';
 
 
 /**
@@ -65,7 +63,7 @@ export class GoodEffects {
     .map(toPayload)
     .switchMap(goodData => {
       return this.goodsService.createGood(goodData)
-        .mergeMap((response) => from([new good.LoadCollectionAction(), new good.CreateGoodSuccessAction(response.data)]))
+        .mergeMap((response) => Observable.from([new good.LoadCollectionAction(), new good.CreateGoodSuccessAction(response.data)]))
         .catch(() => of(new good.CreateGoodFailAction(null)));
     });
 
