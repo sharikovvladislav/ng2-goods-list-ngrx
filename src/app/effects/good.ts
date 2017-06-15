@@ -1,5 +1,6 @@
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
@@ -9,6 +10,7 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
+import { from } from 'rxjs/observable/from';
 import { of } from 'rxjs/observable/of';
 
 import { GoodsService } from '../services/goods';
@@ -62,8 +64,7 @@ export class GoodEffects {
     .map(toPayload)
     .switchMap(goodData => {
       return this.goodsService.createGood(goodData)
-        .map(() => new good.LoadCollectionAction())
-        .map(() => new good.CreateGoodSuccessAction(goodData))
+        .mergeMap(() => from([new good.LoadCollectionAction(), new good.CreateGoodSuccessAction(goodData)]))
         .catch(() => of(new good.CreateGoodFailAction(null)));
     });
 
