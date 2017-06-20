@@ -5,15 +5,16 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/takeUntil';
-import { Injectable } from '@angular/core';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Effect, Actions, toPayload} from '@ngrx/effects';
+import {Action} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
-import { of } from 'rxjs/observable/of';
+import {of} from 'rxjs/observable/of';
 
-import { GoodsService } from '../services/goods';
+import {GoodsService} from '../services/goods';
 import * as good from '../actions/good';
+import * as layout from '../actions/layout';
 
 
 /**
@@ -37,7 +38,7 @@ import * as good from '../actions/good';
 export class GoodEffects {
 
   @Effect()
-  search$: Observable<Action> = this.actions$
+  loadCollection$: Observable<Action> = this.actions$
     .ofType(good.LOAD_COLLECTION)
     .map(toPayload)
     .switchMap(() => {
@@ -63,7 +64,10 @@ export class GoodEffects {
     .map(toPayload)
     .switchMap(goodData => {
       return this.goodsService.createGood(goodData)
-        .mergeMap((response) => Observable.from([new good.LoadCollectionAction(), new good.CreateGoodSuccessAction(response.data)]))
+        .mergeMap((response) => Observable.from([
+          new good.LoadCollectionAction(),
+          new good.CreateGoodSuccessAction(response.data)
+        ]))
         .catch(() => of(new good.CreateGoodFailAction(null)));
     });
 
