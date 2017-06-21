@@ -41,33 +41,68 @@ export class GoodEffects {
   loadCollection$: Observable<Action> = this.actions$
     .ofType(good.LOAD_COLLECTION)
     .map(toPayload)
+    .mergeMap((result: any) => [
+      new layout.ShowLoaderAction(),
+      new good.LoadCollectionStartAction()
+    ]);
+
+  @Effect()
+  loadCollectionStart$: Observable<Action> = this.actions$
+    .ofType(good.LOAD_COLLECTION_START)
+    .map(toPayload)
     .switchMap(() => {
       return this.goodsService.getAllGoods()
-        .map(goods => new good.LoadCollectionSuccessAction(goods))
+        .mergeMap(goods => [
+          new good.LoadCollectionSuccessAction(goods),
+          new layout.HideLoaderAction()
+        ])
         .catch(() => of(new good.LoadCollectionFailAction([])));
     });
+
+  @Effect()
+  saveGoodStart$: Observable<Action> = this.actions$
+    .ofType(good.SAVE_GOOD_START)
+    .map(toPayload)
+    .switchMap(goodData => {
+      return this.goodsService.updateGood(goodData.id, goodData)
+        .mergeMap(() => [
+          new good.SaveGoodSuccessAction(goodData),
+          new layout.HideLoaderAction()
+        ])
+        .catch(() => of(new good.SaveGoodFailAction({})));
+    });
+
 
   @Effect()
   saveGood$: Observable<Action> = this.actions$
     .ofType(good.SAVE_GOOD)
     .map(toPayload)
-    .switchMap(goodData => {
-      return this.goodsService.updateGood(goodData.id, goodData)
-        .map(() => new good.SaveGoodSuccessAction(goodData))
-        .catch(() => of(new good.SaveGoodFailAction({})));
-    });
+    .mergeMap(goodData => [
+      new layout.ShowLoaderAction(),
+      new good.SaveGoodStartAction(goodData)
+    ]);
 
 
   @Effect()
   createGood$: Observable<Action> = this.actions$
     .ofType(good.CREATE_GOOD)
     .map(toPayload)
+    .switchMap((goodData: any) => [
+      new layout.ShowLoaderAction(),
+      new good.CreateGoodStartAction(goodData)
+    ]);
+
+  @Effect()
+  createGoodStart$: Observable<Action> = this.actions$
+    .ofType(good.CREATE_GOOD_START)
+    .map(toPayload)
     .switchMap(goodData => {
       return this.goodsService.createGood(goodData)
-        .mergeMap((response) => Observable.from([
+        .mergeMap((response: any) => [
           new good.LoadCollectionAction(),
-          new good.CreateGoodSuccessAction(response.data)
-        ]))
+          new good.CreateGoodSuccessAction(response.data),
+          new layout.HideLoaderAction()
+        ])
         .catch(() => of(new good.CreateGoodFailAction(null)));
     });
 
