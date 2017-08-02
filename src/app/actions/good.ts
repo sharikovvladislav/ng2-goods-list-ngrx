@@ -2,13 +2,16 @@ import { Action } from '@ngrx/store';
 import { Good } from '../models/good';
 
 export const LOAD_COLLECTION          = '[Good] Load collection';
+export const LOAD_COLLECTION_START    = '[Good] Load collection start';
 export const LOAD_COLLECTION_SUCCESS  = '[Good] Load collection complete';
 export const LOAD_COLLECTION_FAIL     = '[Good] Load collection fail';
 export const SAVE_GOOD                = '[Good] Save good';
+export const SAVE_GOOD_START          = '[Good] Save good start';
 export const SAVE_GOOD_SUCCESS        = '[Good] Save good complete';
 export const SAVE_GOOD_FAIL           = '[Good] Save good fail';
 export const SELECT_GOOD              = '[Good] Select';
 export const CREATE_GOOD              = '[Good] Create good';
+export const CREATE_GOOD_START        = '[Good] Create good start';
 export const CREATE_GOOD_SUCCESS      = '[Good] Create good success';
 export const CREATE_GOOD_FAIL         = '[Good] Create good fail';
 export const OPEN_CREATE_FORM         = '[Good] Open create form';
@@ -32,6 +35,10 @@ export class LoadCollectionSuccessAction implements Action {
   constructor(public payload: Good[]) { }
 }
 
+export class LoadCollectionStartAction implements Action {
+  readonly type = LOAD_COLLECTION_START;
+}
+
 export class LoadCollectionFailAction implements Action {
   readonly type = LOAD_COLLECTION_FAIL;
 
@@ -40,6 +47,12 @@ export class LoadCollectionFailAction implements Action {
 
 export class SaveGoodAction implements Action {
   readonly type = SAVE_GOOD;
+
+  constructor(public payload: Good) { }
+}
+
+export class SaveGoodStartAction implements Action {
+  readonly type = SAVE_GOOD_START;
 
   constructor(public payload: Good) { }
 }
@@ -64,6 +77,12 @@ export class SelectGoodAction implements Action {
 
 export class CreateGoodAction implements Action {
   readonly type = CREATE_GOOD;
+
+  constructor(public payload: Good) { }
+}
+
+export class CreateGoodStartAction implements Action {
+  readonly type = CREATE_GOOD_START;
 
   constructor(public payload: Good) { }
 }
@@ -98,12 +117,15 @@ export class CloseCreateForm implements Action {
 export type Actions
   = LoadCollectionAction
   | LoadCollectionSuccessAction
+  | LoadCollectionStartAction
   | LoadCollectionFailAction
   | SaveGoodAction
+  | SaveGoodStartAction
   | SaveGoodSuccessAction
   | SaveGoodFailAction
   | SelectGoodAction
   | CreateGoodAction
+  | CreateGoodStartAction
   | CreateGoodSuccessAction
   | CreateGoodFailAction
   | OpenCreateForm

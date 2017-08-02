@@ -22,6 +22,7 @@ import { FindBookPageComponent } from './containers/find-book-page';
 import { GoodsContainerComponent } from './containers/goods-container';
 import { GoodEditContainerComponent } from './containers/good-edit';
 import { GoodCreateContainerComponent } from './containers/good-create';
+import { LoaderComponent } from './containers/loader';
 import { ViewBookPageComponent } from './containers/view-book-page';
 import { SelectedBookPageComponent } from './containers/selected-book-page';
 import { CollectionPageComponent } from './containers/collection-page';
@@ -98,6 +99,7 @@ import { GoodsService } from './services/goods';
     GoodEditContainerComponent,
     GoodCreateContainerComponent,
     FindBookPageComponent,
+    LoaderComponent,
     SelectedBookPageComponent,
     ViewBookPageComponent,
     CollectionPageComponent,

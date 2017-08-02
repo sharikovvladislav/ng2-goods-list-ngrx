@@ -26,7 +26,7 @@ import * as layout from '../actions/layout';
       <bc-toolbar (openMenu)="openSidenav()">
         Book Collection
       </bc-toolbar>
-
+      <bc-loader></bc-loader>
       <router-outlet></router-outlet>
     </bc-layout>
   `
